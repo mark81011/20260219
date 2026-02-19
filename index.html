@@ -689,114 +689,214 @@
 // GAME DATA - 3 Levels, 5 Questions Each
 // =============================================
 const LEVELS = [
-  // ── 關卡1：家居物品 ──
+  // ── 關卡1：客廳與臥室 ──
   {
-    name:"關卡1：家居物品", title:"家居物品", desc:"辨識客廳、廚房、臥室常見物品", emoji:"🏠",
-    questions:[
+    name:"關卡1：客廳與臥室", title:"客廳與臥室", desc:"辨識客廳、臥室中常見的生活物品", emoji:"🛋️",
+    pool:[
       { emoji:"📺", word:"電視",   wrong:["冰箱","電風扇"] },
       { emoji:"🛋️", word:"沙發",   wrong:["桌子","椅子"] },
-      { emoji:"", img:"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", word:"遙控器", wrong:["手機","電話"] },
-      { emoji:"🍳", word:"平底鍋", wrong:["鍋蓋","碗"] },
+      { emoji:"",   img:"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", word:"遙控器", wrong:["手機","電話"] },
+      { emoji:"💡", word:"電燈",   wrong:["蠟燭","手電筒"] },
       { emoji:"🛏️", word:"床",     wrong:["沙發","榻榻米"] },
+      { emoji:"🪴", word:"盆栽",   wrong:["花束","仙人掌"] },
+      { emoji:"🖼️", word:"畫框",   wrong:["鏡子","窗戶"] },
+      { emoji:"🪟", word:"窗戶",   wrong:["門","鏡子"] },
+      { emoji:"🚪", word:"門",     wrong:["窗戶","牆壁"] },
+      { emoji:"🧸", word:"玩具熊", wrong:["娃娃","布偶"] },
+      { emoji:"📚", word:"書本",   wrong:["雜誌","報紙"] },
+      { emoji:"⏰", word:"鬧鐘",   wrong:["手錶","碼錶"] },
+      { emoji:"🪑", word:"椅子",   wrong:["凳子","沙發"] },
+      { emoji:"🛁", word:"浴缸",   wrong:["淋浴間","泡腳桶"] },
+      { emoji:"🪞", word:"鏡子",   wrong:["畫框","窗戶"] },
     ]
   },
-  // ── 關卡2：陸上交通 ──
+  // ── 關卡2：廚房與餐廳 ──
   {
-    name:"關卡2：陸上交通", title:"陸上交通工具", desc:"認識在陸地上行駛的各種交通工具", emoji:"🚗",
-    questions:[
+    name:"關卡2：廚房與餐廳", title:"廚房與餐廳", desc:"辨識廚房、餐廳中常見的器具與食具", emoji:"🍳",
+    pool:[
+      { emoji:"🍳", word:"平底鍋", wrong:["鍋蓋","炒鍋"] },
+      { emoji:"🥢", word:"筷子",   wrong:["湯匙","叉子"] },
+      { emoji:"🫖", word:"茶壺",   wrong:["水壺","咖啡壺"] },
+      { emoji:"🍶", word:"茶杯",   wrong:["碗","馬克杯"] },
+      { emoji:"🔪", word:"菜刀",   wrong:["剪刀","水果刀"] },
+      { emoji:"🥄", word:"湯匙",   wrong:["叉子","筷子"] },
+      { emoji:"🍽️", word:"盤子",   wrong:["碗","托盤"] },
+      { emoji:"🥣", word:"碗",     wrong:["盤子","杯子"] },
+      { emoji:"🧂", word:"鹽罐",   wrong:["糖罐","胡椒罐"] },
+      { emoji:"🫙", word:"玻璃罐", wrong:["鐵罐","塑膠瓶"] },
+      { emoji:"🧊", word:"冰塊",   wrong:["糖果","骰子"] },
+      { emoji:"🪣", word:"水桶",   wrong:["垃圾桶","洗碗盆"] },
+      { emoji:"🧽", word:"菜瓜布", wrong:["抹布","海綿"] },
+      { emoji:"🫕", word:"燉鍋",   wrong:["平底鍋","炒鍋"] },
+      { emoji:"🥡", word:"外帶盒", wrong:["便當盒","鐵盒"] },
+    ]
+  },
+  // ── 關卡3：衣物與穿著 ──
+  {
+    name:"關卡3：衣物與穿著", title:"衣物與穿著", desc:"認識各種日常生活中的衣物與配件", emoji:"👕",
+    pool:[
+      { emoji:"👕", word:"T恤",    wrong:["襯衫","毛衣"] },
+      { emoji:"👖", word:"褲子",   wrong:["裙子","短褲"] },
+      { emoji:"👗", word:"裙子",   wrong:["洋裝","褲子"] },
+      { emoji:"🧥", word:"外套",   wrong:["毛衣","夾克"] },
+      { emoji:"👟", word:"運動鞋", wrong:["皮鞋","涼鞋"] },
+      { emoji:"👒", word:"帽子",   wrong:["頭盔","毛帽"] },
+      { emoji:"🧣", word:"圍巾",   wrong:["領帶","頭巾"] },
+      { emoji:"🧤", word:"手套",   wrong:["手環","護腕"] },
+      { emoji:"🧦", word:"襪子",   wrong:["絲襪","褲襪"] },
+      { emoji:"👜", word:"手提包", wrong:["背包","錢包"] },
+      { emoji:"🎒", word:"背包",   wrong:["手提包","側背包"] },
+      { emoji:"☂️", word:"雨傘",   wrong:["陽傘","雨衣"] },
+      { emoji:"💍", word:"戒指",   wrong:["耳環","手環"] },
+      { emoji:"👓", word:"眼鏡",   wrong:["太陽眼鏡","護目鏡"] },
+      { emoji:"🩴", word:"拖鞋",   wrong:["涼鞋","夾腳拖"] },
+    ]
+  },
+  // ── 關卡4：陸上交通工具 ──
+  {
+    name:"關卡4：陸上交通工具", title:"陸上交通工具", desc:"認識在陸地上行駛的各種交通工具", emoji:"🚗",
+    pool:[
       { emoji:"🚗", word:"汽車",   wrong:["卡車","巴士"] },
       { emoji:"🚲", word:"腳踏車", wrong:["機車","滑板車"] },
       { emoji:"🚌", word:"公車",   wrong:["計程車","火車"] },
-      { emoji:"🚂", word:"火車",   wrong:["地鐵","電車"] },
+      { emoji:"🏍️", word:"機車",   wrong:["腳踏車","電動車"] },
+      { emoji:"🚕", word:"計程車", wrong:["公車","救護車"] },
+      { emoji:"🚒", word:"消防車", wrong:["救護車","警車"] },
       { emoji:"🚑", word:"救護車", wrong:["消防車","卡車"] },
+      { emoji:"🏎️", word:"賽車",   wrong:["跑車","卡車"] },
+      { emoji:"🚛", word:"卡車",   wrong:["貨車","拖車"] },
+      { emoji:"🚐", word:"小巴士", wrong:["公車","廂型車"] },
+      { emoji:"🛵", word:"電動機車",wrong:["腳踏車","機車"] },
+      { emoji:"🚜", word:"拖拉機", wrong:["卡車","推土機"] },
+      { emoji:"🛺", word:"嘟嘟車", wrong:["計程車","摩托車"] },
+      { emoji:"🦽", word:"輪椅",   wrong:["嬰兒車","推車"] },
+      { emoji:"🛴", word:"滑板車", wrong:["腳踏車","滑板"] },
     ]
   },
-  // ── 關卡3：飛行與水上 ──
+  // ── 關卡5：飛行、水上與鐵路 ──
   {
-    name:"關卡3：飛行與水上", title:"飛行與水上交通", desc:"認識在天空與水面上的交通工具", emoji:"✈️",
-    questions:[
+    name:"關卡5：飛行與水上", title:"飛行、水上與鐵路", desc:"認識在天空、水面和鐵路上的交通工具", emoji:"✈️",
+    pool:[
       { emoji:"✈️", word:"飛機",   wrong:["直升機","火箭"] },
       { emoji:"🚢", word:"輪船",   wrong:["帆船","潛水艇"] },
       { emoji:"🚁", word:"直升機", wrong:["飛機","熱氣球"] },
       { emoji:"🚀", word:"火箭",   wrong:["飛機","太空梭"] },
       { emoji:"⛵", word:"帆船",   wrong:["輪船","木筏"] },
+      { emoji:"🚂", word:"火車",   wrong:["地鐵","電車"] },
+      { emoji:"🚇", word:"地鐵",   wrong:["火車","輕軌"] },
+      { emoji:"🛸", word:"飛碟",   wrong:["火箭","熱氣球"] },
+      { emoji:"🛶", word:"小船",   wrong:["帆船","橡皮艇"] },
+      { emoji:"⛴️", word:"渡輪",   wrong:["輪船","遊艇"] },
+      { emoji:"🚤", word:"快艇",   wrong:["帆船","漁船"] },
+      { emoji:"🪂", word:"降落傘", wrong:["熱氣球","翼裝"] },
+      { emoji:"🎈", word:"熱氣球", wrong:["飛船","降落傘"] },
+      { emoji:"🛩️", word:"小飛機", wrong:["飛機","直升機"] },
+      { emoji:"🚡", word:"纜車",   wrong:["電車","單軌車"] },
     ]
   },
-  // ── 關卡4：常見水果 ──
+  // ── 關卡6：水果與蔬菜 ──
   {
-    name:"關卡4：常見水果", title:"常見水果", desc:"認識日常生活中常見的新鮮水果", emoji:"🍎",
-    questions:[
+    name:"關卡6：水果與蔬菜", title:"水果與蔬菜", desc:"認識各種新鮮美味的水果和蔬菜", emoji:"🍎",
+    pool:[
       { emoji:"🍎", word:"蘋果",   wrong:["橘子","柳丁"] },
       { emoji:"🍌", word:"香蕉",   wrong:["芒果","木瓜"] },
       { emoji:"🍇", word:"葡萄",   wrong:["藍莓","草莓"] },
       { emoji:"🍉", word:"西瓜",   wrong:["哈密瓜","香瓜"] },
       { emoji:"🍒", word:"櫻桃",   wrong:["草莓","紅豆"] },
-    ]
-  },
-  // ── 關卡5：熱帶水果 ──
-  {
-    name:"關卡5：熱帶水果", title:"熱帶水果", desc:"認識來自熱帶地區的美味水果", emoji:"🥭",
-    questions:[
       { emoji:"🥭", word:"芒果",   wrong:["木瓜","鳳梨"] },
       { emoji:"🍍", word:"鳳梨",   wrong:["芒果","椰子"] },
-      { emoji:"🥝", word:"奇異果", wrong:["鳳梨","芒果"] },
       { emoji:"🍋", word:"檸檬",   wrong:["橘子","柚子"] },
       { emoji:"🍑", word:"水蜜桃", wrong:["杏子","李子"] },
+      { emoji:"🥝", word:"奇異果", wrong:["鳳梨","芒果"] },
+      { emoji:"🥦", word:"花椰菜", wrong:["高麗菜","白花椰菜"] },
+      { emoji:"🥕", word:"紅蘿蔔", wrong:["地瓜","白蘿蔔"] },
+      { emoji:"🌽", word:"玉米",   wrong:["竹筍","蘆筍"] },
+      { emoji:"🧅", word:"洋蔥",   wrong:["大蒜","蔥"] },
+      { emoji:"🍅", word:"番茄",   wrong:["紅椒","草莓"] },
     ]
   },
-  // ── 關卡6：家庭與職業角色 ──
+  // ── 關卡7：家庭成員與職業角色 ──
   {
-    name:"關卡6：家庭與職業角色", title:"家庭與職業角色", desc:"認識家人與社區中的重要角色", emoji:"👨‍👩‍👧",
-    questions:[
+    name:"關卡7：家庭與職業角色", title:"家庭與職業角色", desc:"認識家人及社區中各種重要的角色", emoji:"👨‍👩‍👧",
+    pool:[
       { emoji:"👨", word:"爸爸",   wrong:["叔叔","爺爺"] },
       { emoji:"👩", word:"媽媽",   wrong:["阿姨","奶奶"] },
+      { emoji:"👴", word:"爺爺",   wrong:["外公","叔叔"] },
+      { emoji:"👵", word:"奶奶",   wrong:["外婆","阿姨"] },
       { emoji:"👮", word:"警察",   wrong:["士兵","保全"] },
       { emoji:"👨‍⚕️", word:"醫生",  wrong:["護士","藥師"] },
+      { emoji:"👩‍🏫", word:"老師",  wrong:["教授","輔導員"] },
       { emoji:"👨‍🍳", word:"廚師",  wrong:["服務生","老闆"] },
+      { emoji:"👨‍🚒", word:"消防員",wrong:["警察","救生員"] },
+      { emoji:"👷", word:"工人",   wrong:["農夫","建築師"] },
+      { emoji:"🧑‍🌾", word:"農夫",  wrong:["漁夫","牧場主"] },
+      { emoji:"💇", word:"美髮師", wrong:["美甲師","化妝師"] },
+      { emoji:"🧑‍🔧", word:"水電工", wrong:["木工","油漆工"] },
+      { emoji:"🧑‍💼", word:"上班族", wrong:["店員","業務員"] },
+      { emoji:"🧑‍🎤", word:"歌手",  wrong:["演員","舞者"] },
     ]
   },
-  // ── 關卡7：動物角色 ──
+  // ── 關卡8：動物 ──
   {
-    name:"關卡7：動物角色", title:"動物角色", desc:"認識自然界中各種精彩的動物", emoji:"🦁",
-    questions:[
+    name:"關卡8：動物", title:"動物世界", desc:"認識自然界中各種精彩的動物", emoji:"🦁",
+    pool:[
       { emoji:"🦁", word:"獅子",   wrong:["老虎","豹子"] },
       { emoji:"🐘", word:"大象",   wrong:["河馬","犀牛"] },
       { emoji:"🦊", word:"狐狸",   wrong:["狼","狗"] },
       { emoji:"🐼", word:"熊貓",   wrong:["北極熊","棕熊"] },
       { emoji:"🐬", word:"海豚",   wrong:["鯊魚","鯨魚"] },
+      { emoji:"🦒", word:"長頸鹿", wrong:["駱駝","斑馬"] },
+      { emoji:"🐧", word:"企鵝",   wrong:["海鷗","鸚鵡"] },
+      { emoji:"🦋", word:"蝴蝶",   wrong:["蜜蜂","蜻蜓"] },
+      { emoji:"🐊", word:"鱷魚",   wrong:["蜥蜴","科摩多龍"] },
+      { emoji:"🦓", word:"斑馬",   wrong:["長頸鹿","馬"] },
+      { emoji:"🦜", word:"鸚鵡",   wrong:["烏鴉","麻雀"] },
+      { emoji:"🐙", word:"章魚",   wrong:["水母","烏賊"] },
+      { emoji:"🦀", word:"螃蟹",   wrong:["龍蝦","蝦子"] },
+      { emoji:"🐢", word:"烏龜",   wrong:["蜥蜴","青蛙"] },
+      { emoji:"🦔", word:"刺蝟",   wrong:["松鼠","倉鼠"] },
     ]
   },
-  // ── 關卡8：球類運動 ──
+  // ── 關卡9：運動與休閒 ──
   {
-    name:"關卡8：球類運動", title:"球類運動", desc:"認識各種精彩刺激的球類運動", emoji:"⚽",
-    questions:[
+    name:"關卡9：運動與休閒", title:"運動與休閒", desc:"認識各種運動項目與休閒活動", emoji:"⚽",
+    pool:[
       { emoji:"⚽", word:"足球",   wrong:["籃球","橄欖球"] },
       { emoji:"🏀", word:"籃球",   wrong:["排球","足球"] },
       { emoji:"🎾", word:"網球",   wrong:["羽球","桌球"] },
       { emoji:"⚾", word:"棒球",   wrong:["壘球","板球"] },
-      { emoji:"🏐", word:"排球",   wrong:["籃球","手球"] },
-    ]
-  },
-  // ── 關卡9：水上與冬季運動 ──
-  {
-    name:"關卡9：水上與冬季運動", title:"水上與冬季運動", desc:"認識水中與雪地上的各種運動", emoji:"🏊",
-    questions:[
       { emoji:"🏊", word:"游泳",   wrong:["潛水","衝浪"] },
-      { emoji:"🤿", word:"潛水",   wrong:["游泳","水球"] },
-      { emoji:"🏄", word:"衝浪",   wrong:["滑水","划船"] },
       { emoji:"⛷️", word:"滑雪",   wrong:["溜冰","雪橇"] },
-      { emoji:"⛸️", word:"溜冰",   wrong:["滑雪","曲棍球"] },
+      { emoji:"🎮", word:"電玩",   wrong:["桌遊","積木"] },
+      { emoji:"🎨", word:"繪畫",   wrong:["雕塑","素描"] },
+      { emoji:"🎸", word:"吉他",   wrong:["鋼琴","小提琴"] },
+      { emoji:"📷", word:"相機",   wrong:["望遠鏡","顯微鏡"] },
+      { emoji:"🎯", word:"射飛鏢", wrong:["射箭","保齡球"] },
+      { emoji:"🏋️", word:"舉重",   wrong:["鉛球","柔道"] },
+      { emoji:"🧗", word:"攀岩",   wrong:["登山","跳傘"] },
+      { emoji:"🎣", word:"釣魚",   wrong:["游泳","划船"] },
+      { emoji:"♟️", word:"西洋棋", wrong:["圍棋","象棋"] },
     ]
   },
-  // ── 關卡10：終極大挑戰 ──
+  // ── 關卡10：終極混合大挑戰 ──
   {
     name:"關卡10：終極大挑戰", title:"🏆 終極大挑戰", desc:"混合所有類型！展現你學到的一切！", emoji:"🏆",
-    questions:[
+    pool:[
       { emoji:"🚗", word:"汽車",   wrong:["機車","腳踏車"] },
       { emoji:"🥭", word:"芒果",   wrong:["木瓜","鳳梨"] },
       { emoji:"👮", word:"警察",   wrong:["消防員","士兵"] },
       { emoji:"⚽", word:"足球",   wrong:["橄欖球","手球"] },
       { emoji:"🦁", word:"獅子",   wrong:["老虎","花豹"] },
+      { emoji:"👕", word:"T恤",    wrong:["襯衫","毛衣"] },
+      { emoji:"🍅", word:"番茄",   wrong:["紅椒","草莓"] },
+      { emoji:"🛏️", word:"床",     wrong:["沙發","榻榻米"] },
+      { emoji:"✈️", word:"飛機",   wrong:["直升機","火箭"] },
+      { emoji:"🎸", word:"吉他",   wrong:["鋼琴","小提琴"] },
+      { emoji:"🔪", word:"菜刀",   wrong:["剪刀","剉刀"] },
+      { emoji:"🐼", word:"熊貓",   wrong:["北極熊","棕熊"] },
+      { emoji:"🧣", word:"圍巾",   wrong:["領帶","頭巾"] },
+      { emoji:"🥢", word:"筷子",   wrong:["湯匙","叉子"] },
+      { emoji:"🚁", word:"直升機", wrong:["飛機","熱氣球"] },
     ]
   },
 ];
@@ -812,6 +912,8 @@ let levelScores = [];
 let answering = false;
 let firstAttempt = true;
 let shuffledOptions = [];
+let usedWords = new Set();   // 跨關卡已出現過的題目
+let levelQuestions = [];     // 本關抽出的5題
 
 // =============================================
 // AUDIO - Web Speech API (TTS)
@@ -844,7 +946,7 @@ function speakChinese(text, rate=0.85, pitch=1.2) {
 
 function speakWord() {
   if (currentLevel >= LEVELS.length) return;
-  const q = LEVELS[currentLevel].questions[currentQuestion];
+  const q = levelQuestions[currentQuestion];
   speakChinese(q.word);
 }
 
@@ -947,6 +1049,7 @@ function startGame() {
   currentLevel = 0;
   totalScore = 0;
   levelScores = Array(LEVELS.length).fill(0);
+  usedWords = new Set();
   showLevelIntro();
 }
 
@@ -962,13 +1065,19 @@ function showLevelIntro() {
 function startLevel() {
   currentQuestion = 0;
   levelScore = 0;
+  // 從 pool 中排除 usedWords，隨機抽 5 題
+  const pool = LEVELS[currentLevel].pool;
+  const available = pool.filter(q => !usedWords.has(q.word));
+  const source = available.length >= 5 ? available : pool; // 題庫不夠時 fallback
+  const shuffled = [...source].sort(() => Math.random() - 0.5);
+  levelQuestions = shuffled.slice(0, 5);
+  levelQuestions.forEach(q => usedWords.add(q.word));
   loadQuestion();
   showScreen('quizScreen');
 }
 
 function loadQuestion() {
-  const lv = LEVELS[currentLevel];
-  const q = lv.questions[currentQuestion];
+  const q = levelQuestions[currentQuestion];
   answering = false;
   firstAttempt = true;
 
@@ -1015,7 +1124,7 @@ function loadQuestion() {
 function checkAnswer(idx) {
   if (answering) return;
 
-  const q = LEVELS[currentLevel].questions[currentQuestion];
+  const q = levelQuestions[currentQuestion];
   const chosen = shuffledOptions[idx];
   const isCorrect = (chosen === q.word);
 
@@ -1131,6 +1240,8 @@ function nextLevel() {
 function replayLevel() {
   totalScore -= levelScores[currentLevel];
   levelScores[currentLevel] = 0;
+  // 把本關已用的詞移出 usedWords，讓重玩時可以重新抽
+  levelQuestions.forEach(q => usedWords.delete(q.word));
   startLevel();
 }
 
